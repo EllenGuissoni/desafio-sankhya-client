@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { FinancasService } from '../core/services/financas.service';
+import { FinancasService } from '../cadastrar/financas.service';
 import { UtilsService } from '../core/services/utils.service';
 
 export interface Financeiro {
@@ -27,6 +27,7 @@ export class ContentComponent implements OnInit {
 
 	displayedColumns: string[] = ['id', 'descricao', 'vencimento', 'valor', 'excluir'];
 
+    calculos_financeiros: Array<any>;
 	// calculos_financeiros: Financeiro[] = [
 	// 	{ id: 1, descricao: 'Lorem ipsum dolor sit amett', vencimento: '2019-02-07', valor: 2500.00, tipo: 'RECEITA' },
 	// 	{ id: 2, descricao: 'Aluguel', vencimento: '2019-02-08', valor: 650.00, tipo: 'DESPESA' },

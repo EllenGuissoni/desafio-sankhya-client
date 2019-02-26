@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://desafio-sankhya-server.herokuapp.com'
+  apiUrl: 'https://desafio-sankhya-server.herokuapp.com/lancamentos'
 };

@@ -1,49 +1,38 @@
 <div class="container">
+    <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">{{ mensagemSucesso }}</div>
+    <div class="alert alert-danger" role="alert" *ngIf="mensagemError">{{ mensagemError }}</div>
   <h2>Cadastro Financeiro</h2>
-  <form [formGroup]="form">
+  <div>
     <div class="form-group">
       <label for="descricao">Descrição</label>
-      <input type="text" class="form-control" formControlName="descricao" id="descricao" required>
-    </div>
-    <!-- <div *ngIf="form.controls['descricao'].errors.required">
-      Preenchimento obrigatório
-    </div> -->
-    <div *ngIf="!form.controls['descricao'].valid" class="alert alert-danger">
-        Descricao is required.
+      <input type="text" class="form-control" id="descricao" [(ngModel)]="financa.descricao" />
     </div>
 
     <div class="form-group">
       <label for="tipo">Tipo</label>
-      <select class="form-control" id="tipo" required [(ngModel)]="model.tipo" name="tipo">
-        <option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo }}</option>
+      <select class="form-control" name="tipo" [(ngModel)]="financa.tipo">
+        <option value="DESPESA">Despesa</option>
+        <option value="RECEITA">Receita</option>
       </select>
     </div>
-    <!-- <div [hidden]="tipo.valid" class="alert alert-danger">
-      Preenchimento obrigatório
-    </div> -->
 
     <div class="form-group">
       <label for="vencimento">Vencimento</label>
-      <input type="text" class="form-control" id="vencimento"  mask="00/00/0000">
+      <input type="text" class="form-control" id="descricao" [(ngModel)]="financa.vencimento" />
     </div>
-    <!-- <div [hidden]="vencimento.valid" class="alert alert-danger">
-      Preenchimento obrigatório
-    </div> -->
 
     <div class="form-group">
       <label for="valor">Valor</label>
-      <input type="text" class="form-control" id="valor" >
+      <input type="text" class="form-control" id="valor" [(ngModel)]="financa.valor"/>
     </div>
-    <!-- <div [hidden]="valor.valid" class="alert alert-danger">
-      Preenchimento obrigatório
-    </div> -->
 
-    <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
+    <button type="submit" class="btn btn-success" (click)="salvar()">Submit</button>
 
-  </form>
+  </div>
 </div>
 
 <div class="form-row align-items-center">
   <div class="col-auto my-1">
     <a routerLink=""><button class="btn btn-primary">
-        Cancelar</button> </a> </div> </div>
+        Cancelar</button> </a> </div>
+</div>

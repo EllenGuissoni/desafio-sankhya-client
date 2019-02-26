@@ -23,13 +23,17 @@
 			<ng-container matColumnDef="valor">
 				<th mat-header-cell *matHeaderCellDef> Valor (R$) </th>
 				<td mat-cell *matCellDef="let financeiro"> {{ financeiro.valor | currency }} </td>
-				
+
 			</ng-container>
 
 			<!-- Excluir -->
 			<ng-container matColumnDef="excluir">
 				<th mat-header-cell *matHeaderCellDef> Excluir </th>
-				<td mat-cell *matCellDef="let financeiro" (click)="excluir(financeiro.id)"> Excluir {{ financeiro.id }} </td>
+				<td mat-cell *matCellDef="let financeiro">
+					<button type="button" class="btn btn-danger btn-sm" (click)="deleteTransaction(transaction)">
+						Remover
+					</button>
+				</td>
 			</ng-container>
 
 			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -38,9 +42,6 @@
 	</div>
 	<div class="col-sm-12 col-md-12 col-lg-6">
 		<!-- grafico -->
-		<div style="display: block">
-			<canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-				(chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-		</div>
+		<canvas baseChart [data]="getChartData()" [labels]="getChartLabel()" [chartType]="getChartType()"></canvas>
 	</div>
 </div>

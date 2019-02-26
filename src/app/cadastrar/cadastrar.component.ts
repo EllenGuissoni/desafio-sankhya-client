@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {first} from 'rxjs/operators';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import * as moment from 'moment';	
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
 
-import { FinancasService } from '../core/services/financas.service';
+import { Subscription } from 'rxjs';
+
+import { FinancasService } from './financas.service';
+import { Financa } from './financa';
 
 @Component({
 	selector: 'app-cadastrar',
@@ -12,57 +14,47 @@ import { FinancasService } from '../core/services/financas.service';
 })
 export class CadastrarComponent implements OnInit {
 
-	form: FormGroup;
-	submitted = false;
+    financa: Financa;
+    mensagemSucesso: any;
+    mensagemError: any;
+    inscricao: Subscription;
 
-	tipos = ['DESPESA', 'RECEITA'];
+    salvar() {
 
-	financas: any[] = [];
-
-	constructor(
-		private fb: FormBuilder,
-		private financasService: FinancasService
-	) {}
-	
-	ngOnInit(): void {
-        this.form = this.fb.group({
-            description: ['', [Validators.required]],
-            type: ['DESPESA', [Validators.required]],
-            date: [this.dateFormat(), [Validators.required]],
-            total: ['', [Validators.required]]
-        });
-	}
-
-	onSubmit() {
-
-		if (!this.form.valid) {
-            return;
+        if (this.financa.descricao && this.financa.valor && this.financa.tipo) {
+            this.inscricao = this.financaService.salvarLancamento(this.financa)
+                .subscribe(
+                    financa => {
+                        this.mensagemSucesso = "Registro inserido com sucesso";
+                        this.financa = new Financa();
+                        this.mensagemError = "";
+                    },
+                    error => {
+                        this.mensagemError = "Erro ao inserir registro";
+                        this.mensagemSucesso = "";
+                    }
+                )
         }
-
-        const formData = this.form.value;
-        formData.date = this.normalizeDate(formData.date);
-
-    //    formData.result.then((result) => {
-    //         this.financasService.createFinanca(result)
-    //             .subscribe((data: any) => this.loadTransactions());
-    //     }).catch((reason: any) => {
-
-    //     });
-
-
-		this.submitted = true;
-	}
-
-	private loadTransactions() {
-        this.financasService.getFinancas()
-            .pipe(first())
-            .subscribe((data: any) => {
-                this.financas = data;
-            });
+        else {
+            this.mensagemError = "Preencha todos os campos!";
+            this.mensagemSucesso = "";
+        }
     }
 
-	private dateFormat() {
-        return moment().format('DD/MM/YYYY');
+    constructor(private financaService: FinancasService, private router: Router) {
+
+    }
+
+    ngOnInit() {
+        this.financa = new Financa();
+        this.mensagemSucesso = "";
+        this.mensagemError = "";
+    }
+
+    ngOnDestroy() {
+        if (this.inscricao) {
+            this.inscricao.unsubscribe();
+        }
     }
 
     private normalizeDate(date: string) {
