@@ -19,6 +19,7 @@ import { CadastrarComponent } from './cadastrar/cadastrar.component';
 import { ContentComponent } from './content/content.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { CoreModule } from '../app/core/core.module';
 
 
 
@@ -43,7 +44,8 @@ import { HeaderComponent } from './header/header.component';
 		HttpClientModule,
 		MatIconModule,
 		MatNativeDateModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		CoreModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

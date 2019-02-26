@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
