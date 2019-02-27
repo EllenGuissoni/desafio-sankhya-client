@@ -25,7 +25,7 @@ export class ContentComponent implements OnInit {
 
 	financas: any[] = [];
 
-	displayedColumns: string[] = ['id', 'descricao', 'vencimento', 'valor', 'excluir'];
+	displayedColumns: string[] = ['descricao', 'vencimento', 'valor', 'excluir'];
 
     calculos_financeiros: Array<any>;
 	// calculos_financeiros: Financeiro[] = [
@@ -48,28 +48,28 @@ export class ContentComponent implements OnInit {
     }
 
     deletarFinanca(financa: any) {
-        this.financasService.deleteFinancaPorId(financa.id)
+        this.financasService.deletarLancamentoPeloId(financa.id)
             .subscribe((data: any) => this.carregarFinancas());
     }
 
     verificaRenda(financa: any) {
-        return financa.type === 'REVENUE';
+        return financa.tipo === 'RECEITA';
     }
 
     verificaDespesa(financa: any) {
-        return financa.type === 'EXPENSE';
+        return financa.tipo === 'DESPESA';
     }
 
-    formatTotalTransaction(transaction: any) {
+    formatTotalFinacas(financa: any) {
         let prefix = '';
         let className = 'text-success';
 
-        if (this.verificaDespesa(transaction)) {
+        if (this.verificaDespesa(financa)) {
             prefix = '- ';
             className = 'text-danger';
         }
 
-        return `<span class="${className}">${prefix}${this.utilsService.moneyFormat(transaction.total)}</span>`;
+        return `<span class="${className}">${prefix}${this.utilsService.moneyFormat(financa.valor)}</span>`;
     }
 
     getChartLabel() {
@@ -123,7 +123,7 @@ export class ContentComponent implements OnInit {
     }
 
     private carregarFinancas() {
-        this.financasService.getFinancas()
+        this.financasService.buscarTodosOsLancamentos()
             .pipe(first())
             .subscribe((data: any) => {
                 this.financas = data;

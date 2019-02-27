@@ -22,12 +22,18 @@ export class CadastrarComponent implements OnInit {
     salvar() {
 
         if (this.financa.descricao && this.financa.valor && this.financa.tipo) {
+            
+            this.financa.vencimento = this.normalizeDate(this.financa.vencimento);
+
             this.inscricao = this.financaService.salvarLancamento(this.financa)
                 .subscribe(
                     financa => {
                         this.mensagemSucesso = "Registro inserido com sucesso";
                         this.financa = new Financa();
                         this.mensagemError = "";
+                        this.router.routeReuseStrategy.shouldReuseRoute = function () {
+                            return false;
+                          };
                     },
                     error => {
                         this.mensagemError = "Erro ao inserir registro";

@@ -9,7 +9,7 @@ export class FinancasService {
     ) {
     }
 
-    getFinancas() {
+    buscarTodosOsLancamentos() {
         return this.http.get<any>(`${environment.apiUrl}/lancamentos`);
     }
 
@@ -17,7 +17,7 @@ export class FinancasService {
         return this.http.post<any>(`${environment.apiUrl}/lancamentos`, lancamento);
     }
 
-    deleteFinancaPorId(id: number) {
+    deletarLancamentoPeloId(id: number) {
         return this.http.delete<any>(`${environment.apiUrl}/lancamentos/${id}`);
     }
 }

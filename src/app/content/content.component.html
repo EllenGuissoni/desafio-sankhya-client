@@ -1,12 +1,6 @@
 <div class="row">
 	<div class="col-sm-12 col-md-12 col-lg-6">
-		<table mat-table [dataSource]="calculos_financeiros" class="mat-elevation-z8">
-			<!-- descricao -->
-			<ng-container matColumnDef="id">
-				<th mat-header-cell *matHeaderCellDef> Nº Cadastro </th>
-				<td mat-cell *matCellDef="let financeiro"> {{ financeiro.id }} </td>
-			</ng-container>
-
+		<table mat-table [dataSource]="financas" class="mat-elevation-z8">
 			<!-- descricao -->
 			<ng-container matColumnDef="descricao">
 				<th mat-header-cell *matHeaderCellDef> Descricao </th>
@@ -22,7 +16,9 @@
 			<!-- Valor -->
 			<ng-container matColumnDef="valor">
 				<th mat-header-cell *matHeaderCellDef> Valor (R$) </th>
-				<td mat-cell *matCellDef="let financeiro"> {{ financeiro.valor | currency }} </td>
+			<td mat-cell *matCellDef="let financeiro"  [innerHTML]="formatTotalFinacas(financeiro)"> 
+				{{ financeiro.valor | currency }} 
+			</td>
 
 			</ng-container>
 
@@ -30,7 +26,7 @@
 			<ng-container matColumnDef="excluir">
 				<th mat-header-cell *matHeaderCellDef> Excluir </th>
 				<td mat-cell *matCellDef="let financeiro">
-					<button type="button" class="btn btn-danger btn-sm" (click)="deleteTransaction(transaction)">
+					<button type="button" class="btn btn-danger btn-sm" (click)="deletarFinanca(financeiro)">
 						Remover
 					</button>
 				</td>
