@@ -38,7 +38,10 @@ export class FinancasComponent implements OnInit {
     financa.vencimento = this.converteData(financa.vencimento);
 
     this.financaService.criarFinanca(this.form.value)
-      .subscribe((data: any) => this.carregarFinancas());
+      .subscribe((data: any) => {
+        this.form.reset();
+        this.carregarFinancas();
+      });
   }
 
   deletarFinanca(financa: any) {
