@@ -1,5 +1,5 @@
 {
-  "name": "desafio",
+  "name": "desafio-sankhya-client",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -11,32 +11,21 @@
     "postinstall": "ng build --aot --prod"
   },
   "engines": {
-    "node": "8.15.0",
+    "node": "10.15.1",
     "npm": "6.4.1"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^7.2.6",
-    "@angular/cdk": "^7.3.3",
+    "@angular/animations": "~7.2.0",
     "@angular/common": "~7.2.0",
     "@angular/compiler": "~7.2.0",
     "@angular/core": "~7.2.0",
     "@angular/forms": "~7.2.0",
-    "@angular/material": "^7.3.3",
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
-    "@fortawesome/angular-fontawesome": "^0.3.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.15",
-    "@fortawesome/free-solid-svg-icons": "^5.7.2",
-    "@rxjs/rx": "^4.1.0",
-    "bootstrap": "^4.3.1",
-    "chart.js": "^2.7.3",
     "core-js": "^2.5.4",
     "express": "^4.16.4",
-    "moment": "^2.24.0",
-    "ng2-charts": "^1.6.0",
-    "ng2-currency-mask": "^5.3.1",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
