@@ -1,0 +1,83 @@
+<div class="row mt-5">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label>Descrição</label>
+            <input class="form-control" placeholder="Descrição" formControlName="descricao">
+          </div>
+
+          <div class="form-group">
+            <label>Tipo</label>
+            <select class="form-control" formControlName="tipo">
+              <option value="RECEITA">Receita</option>
+              <option value="DESPESA">Despesa</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Vencimento</label>
+            <input class="form-control" placeholder="Vencimento" formControlName="vencimento">
+          </div>
+
+          <div class="form-group">
+            <label>Valor</label>
+            <input class="form-control" placeholder="Valor" formControlName="valor">
+          </div>
+        </form>
+
+        <button type="button" class="btn btn-primary" (click)="salvar()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-5">
+  <div class="col-md-7 mt-5">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Vencimento</th>
+              <th>Valor</th>
+              <th>Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let financa  of financas">
+              <td>
+                {{ financa.descricao }}
+              </td>
+
+              <td class="text-center">
+                {{ financa.vencimento | amDateFormat: 'DD/MM/YYYY' }}
+              </td>
+
+              <td class="text-right font-weight-bold" [innerHTML]="formatTotalFinacas(financa)"></td>
+
+              <td>
+                <button type="button" class="btn btn-danger" (click)="deletarFinanca(financa)">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-5 mt-5">
+    <div class="card" *ngIf="financas.length">
+      <div class="card-body">
+        <div style="display: block">
+            <canvas baseChart
+              [data]="getDadosGrafico()"
+              [labels]="getSeriesGrafico()"
+              [chartType]="getTipoGrafico()"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
